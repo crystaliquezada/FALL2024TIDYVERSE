@@ -69,6 +69,8 @@ Revision/Addition Description and Link:
 # Kevin H.
 
 Initial Description and Link:
+- Using `across()` with `mutate()` for column-wise transformations
+- across_vignette.Rmd
 
 Revision/Addition Description and Link:
 
