@@ -7,7 +7,8 @@ Initial Description and Link:
 
 
 Revision/Addition Description and Link: 
-* Modified ggplot/forcats example to demonstrate sorting, other category *
+* Modified ggplot/forcats example to demonstrate sorting, other category
+* ggplot_forcats.qmd
 
 # Amish R.
 
