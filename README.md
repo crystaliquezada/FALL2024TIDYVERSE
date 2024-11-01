@@ -78,6 +78,8 @@ Revision/Addition Description and Link:
 # Kevin K.
 
 Initial Description and Link:
+* Combining `tidytext` for text mining with `gganimate` for animated visuals to create dynamic visualizations 
+* kkirby_tidytext.Rmd
 
 Revision/Addition Description and Link:
 
