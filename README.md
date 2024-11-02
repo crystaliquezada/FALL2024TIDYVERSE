@@ -48,8 +48,8 @@ Revision/Addition Description and Link:
 # John F.
 
 Initial Description and Link:
-    - Basic Usage of the `group_by()` function for aggregate metrics.
-    - groupby_vingette.Rmd
+- Basic Usage of the `group_by()` function for aggregate metrics.
+- groupby_vingette.Rmd
 
 Revision/Addition Description and Link:
 
