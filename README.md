@@ -101,7 +101,12 @@ Revision/Addition Description and Link:
 
 # Matthew T.
 
+Exploring how to work with nested data using `unnest()`
+
 Initial Description and Link:
+Nested data occurs when a cell of a dataframe contains a list or similar object. Properly unnesting can range from very simple to incredibly complicated, and we will explore a few examples and explain how to handle them using the `tidyr` package.
+
+[Click here to see the example!](unnesting.Rmd)
 
 Revision/Addition Description and Link:
 
