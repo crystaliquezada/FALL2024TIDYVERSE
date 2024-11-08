@@ -52,6 +52,9 @@ Initial Description and Link:
 - groupby_vingette.Rmd
 
 Revision/Addition Description and Link:
+- Extended the initial file `unnesting.Rmd` from tillmawitz
+- Around line 114 is where my extension begins.
+
 
 
 # Julian A-N.
