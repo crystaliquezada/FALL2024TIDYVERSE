@@ -1,0 +1,70 @@
+---
+title: "Analyzing Donald Trump's Polling Trends Using TidyVerse"
+output: html_document
+---
+
+## Introduction
+This vignette displays how to use TidyVerse packages to analyze polling data from [FiveThirtyEight](https://projects.fivethirtyeight.com/). The data set tracks favorability trends for candidates Joe Biden and Donald Trump.
+
+In this vignette I used dplyr for data wrangling, ggplot2 for visualization, and kable from the knitr package for professional table formatting. The goal was to examine how Trump's polling trends evolved over time.
+
+---
+
+## Load Libraries and Dataset
+```{r}
+library(ggplot2)
+library(tidyverse)
+library(knitr) # For kable
+
+# Loads polling dataset from FiveThirtyEight
+file_path <- "C:/Users/poiso/Downloads/president_polls.csv"
+polls_data <- read_csv(file_path)
+```
+
+
+```{r}
+# Filters specifically for Donald Trump polling data and parses start_date column
+trump_polls <- polls_data %>%
+  filter(candidate_name == "Donald Trump") %>%
+  mutate(
+    start_date = as.Date(start_date, format = "%m/%d/%y"), # Convert start_date to Date
+    pct = as.numeric(pct)                                 # Ensure pct is numeric
+  ) %>%
+  filter(!is.na(start_date), !is.na(pct)) # Remove rows with missing dates or percentages
+```
+
+
+```{r}
+# Summarizes polling trends for Donald Trump by month
+monthly_summary <- trump_polls %>%
+  mutate(month = format(start_date, "%Y-%m")) %>%
+  group_by(month) %>%
+  summarize(
+    avg_pct = mean(pct, na.rm = TRUE)
+  ) %>%
+  mutate(month_date = as.Date(paste0(month, "-01"))) %>%
+  arrange(month_date)
+
+# Display the summary data using kable
+monthly_summary %>%
+  head(10) %>% # Display only the first 10 rows for readability
+  kable(
+    caption = "Donald Trump's Average Polling Percentage by Month",
+    col.names = c("Month", "Average Favorability (%)", "Month Date")
+  )
+```
+
+
+```{r}
+# Creates visualization for the data using ggplot
+ggplot(monthly_summary, aes(x = month_date, y = avg_pct)) +
+  geom_line(color = "blue", size = 1) +
+  theme_minimal() +
+  labs(
+    title = "Donald Trump's Polling Trend Over Time",
+    x = "Month",
+    y = "Average Favorability Percentage"
+  )
+```
+
+Using TidyVerse and kable I analyzed and created a visualization for data related to Donald Trumps polling numbers over the past several years. It can be seen that his polling numbers move significantly over time, with an upward trend appearing to take place when the data reaches it's most current state. The use of dplyr created efficient data manipulation, while kable and ggplot2 enhanced the presentation of results.I chose this data set due to my own interest into where Donald Trump was polling over the past several years, as the recent election results had come as a surprise to myself. With the democratic party polling data being in regards to Joe Biden, I also felt it more appropriate to focus solely on Trump. 
