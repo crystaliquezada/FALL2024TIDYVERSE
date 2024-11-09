@@ -89,6 +89,9 @@ Revision/Addition Description and Link:
 # Kimberly K.
 
 Initial Description and Link:
+- Using 'dense_rank()' with 'group_by()' and 'desc()' to perform equivalent to rank() over (partition by order by) in SQL
+- Using case_when() to perform equivalent to case when in SQL
+- DATA_607_Koon_Tidyverse_Create.Rmd
 
 Revision/Addition Description and Link:
 
