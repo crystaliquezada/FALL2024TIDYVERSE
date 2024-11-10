@@ -175,6 +175,44 @@ roman_numerals
 
 ```
 
+
+
+### Example using Kaggle Dataset
+
+Cars Dataset was used for the example [Cars Dataset (2010-2020)](https://www.kaggle.com/datasets/waqi786/cars-dataset-2010-2020?select=cars_2010_2020.csv)
+
+#### Loading dataset
+
+```{r Kaggle_Dataset}
+
+library(readr)
+library(dplyr)
+
+car_info_df <- read_csv("data/cars_2010_2020.csv")
+
+colnames(car_info_df) <- gsub("\\s", "_", tolower(colnames(car_info_df))) 
+
+colnames(car_info_df) <- gsub("[()]", "", colnames(car_info_df))
+
+head(car_info_df)
+
+
+```
+
+#### Using map_dbl()
+
+In this example I used `map_dbl` to generate a new column with the conversion to CAD.
+
+```{r Kaggle_Datasetmap_dbl}
+
+car_info_df <- car_info_df |>
+  mutate(price_cad = map_dbl(price_usd, ~ .x * 1.39))
+
+car_info_df
+
+```
+
+
 ### Conclusion
 
 The `purrr` package, part of the Tidyverse, brings functional programming capabilities to R, making data manipulation with lists, vectors, and data frames more efficient and flexible.
