@@ -27,6 +27,8 @@ Revision/Addition Description and Link:
 # Benjamin W.
 
 Initial Description and Link:
+* Demonstrates how to use the gather function to collpse multiple columns of a datadrame into key-value pairs.
+* BW_Gather.RMD
 
 Revision/Addition Description and Link:
 
