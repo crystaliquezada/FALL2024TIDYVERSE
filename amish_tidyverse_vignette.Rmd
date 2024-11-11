@@ -1,0 +1,59 @@
+---
+title: "Tidyverse Example with Rock Dataset"
+author: "Amish Rasheed"
+date: "2024-11-11"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+In this example, we’ll use the Tidyverse functions `group_by` and `summarize` to analyze the built-in rock dataset in R. This dataset includes measurements of rock samples, such as area, perimeter, shape, and permeability. We'll group the data by a categorical representation of the shape variable and calculate summary statistics.
+
+# Load Tidyverse
+
+```{r}
+library(tidyverse)
+```
+
+# Load the built-in rock dataset
+
+```{r}
+data("rock")
+```
+
+## The rock dataset contains four columns:
+
+**area**: Area of the rock sample in square pixels.
+**peri**: Perimeter of the rock sample in pixels. 
+**shape**: Shape of the rock sample. 
+**perm**: Permeability of the rock sample.
+
+# Example: Summarize by a rounded 'shape' value
+
+```{r}
+rock_summary <- rock %>%
+  mutate(shape_category = round(shape, 1)) %>%  # Round to one decimal place
+  group_by(shape_category) %>%                 
+  summarize(
+    avg_area = mean(area),                   
+    avg_perm = mean(perm),                   
+    count = n()                              
+  )
+
+# Plot the summarized data
+ggplot(rock_summary, aes(x = factor(shape_category), y = avg_area)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  labs(
+    title = "Average Area by Shape Category",
+    x = "Shape Category (Rounded to 1 Decimal Place)",
+    y = "Average Area"
+  ) +
+  theme_minimal()
+```
+
+# Conclusion
+In this example, I demonstrated how to use group_by and summarize to compute summary statistics for grouped data using the Tidyverse package. I also created a bar plot to visualize the average area across different shape categories.
