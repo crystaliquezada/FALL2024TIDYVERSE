@@ -156,5 +156,9 @@ Revision/Addition Description and Link:
 # Alinzon Simon
 
 Initial Description and Link:
+`purrr`, is part of the Tidyverse and is designed for working with functional programming concepts in R; especially for lists, vectors, and data frames. 
+https://purrr.tidyverse.org/
+
+purrr_tidyverse.Rmd
 
 Revision/Addition Description and Link:

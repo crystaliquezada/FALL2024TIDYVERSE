@@ -43,3 +43,19 @@ head(pool_by_bro_type)
 
 ```
 
+## Remove the grouping
+`upgroup()` removes the grouping and it allows you to calculate further operations on the data frame
+
+```{r upgroup}
+
+## Calculate the mean pool by borough
+pool_by_bro_type_mean <- pool_by_bro_type |> 
+  group_by(borough) |> 
+  mutate(pool_count_mean = mean(pool_count)) |>   
+  ungroup() 
+
+
+head(pool_by_bro_type_mean)
+
+
+```
