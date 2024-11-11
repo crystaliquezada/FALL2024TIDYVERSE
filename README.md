@@ -141,7 +141,8 @@ Revision/Addition Description and Link:
 
 # Zachary R.
 
-Initial Description and Link:
+Initial Description and Link:A vignette demonstrating the use of TidyVerse packages (`dplyr`, `ggplot2`, and `kable`) to analyze polling trends using FiveThirtyEight data on Donald Trump's polling percentages over time.
+Data607TidyVerse.Rmd
 
 Revision/Addition Description and Link:
 
