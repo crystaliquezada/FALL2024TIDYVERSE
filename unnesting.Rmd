@@ -109,3 +109,74 @@ cartesian_product
 ### Next steps
 
 We only covered a few examples here, but there are many more possibilities for nested data. Imagine we sorted station_temps and station_precipitation in opposite orders (one ascending by date and the other descending) or instead of using different windows for the resorts we had different windows for the nested dataframes. Handling these scenarios would be a good extension of this example...
+
+
+### -------------------------------------Extension of Nested Vingette -------------------------------------
+Using the initial unnest example used in this vingette, we will explore some other inputs and features for the `unnest()` function. 
+
+### keep_empty 
+Using this input variable we can handle instance where there may not be a value available to unnest. As you know data is hardly ever perfect. In this instance lets say, that there is a Third Weather Station that does not have a nested df within the station_df column. However, even though we dont have data for this station we want to keep the station_name itself in t he data for future reference. For this we will use the "keep_empty" function.Lets set up this example. 
+
+```{r extension1}
+## Filtering the Breck and Dillon date by dates first because of how the example is structured
+
+dates_breck_data <- breck_data |> filter(date > "2021-01-01" & date < "2021-01-08")
+dates_dillon_data <- dillon_data |>filter(date > "2021-01-01" & date < "2021-01-08")
+
+#Recreating the Nested data 
+nested_data <- tibble(
+  weather_station = c("Breckenridge", "Dillon"),
+  station_df = list(dates_breck_data, dates_dillon_data)
+)
+
+## Adding a new row for our "keep_empty" example
+new_row <- tibble(
+  weather_station = c("Third Station"),
+  station_df = list(NULL))
+
+nested_empty_ex <- rbind(nested_data, new_row)
+  
+# Taking a look at the new nested data
+nested_empty_ex
+
+# Going ahead and unnesting this data (first with the default settings)
+unnested_data_ex <- nested_empty_ex |>
+    unnest(station_df)
+
+# Looking at the results we can see the "Third Station" is no longer in the data.
+unnested_data_ex
+
+#However, if we set the "keep_empty" input value to true. We then retain that datapoint. 
+
+# Going ahead and unnesting this data (Now using the "keep_empty" )
+thirdstation_unnested_data <- nested_empty_ex |>
+    unnest(station_df, keep_empty = TRUE)
+
+# Looking at results
+thirdstation_unnested_data
+```
+
+### names_sep
+
+Another means of handling the names of columns that users should know when workign with the unnest function is the "names_sep" input parameter. Lets say we already had a date column in the nested df. We want to handle this column name conflict by keeping the column name that we unested the data from. This will maintain unique column names for the new unnested df. With the "names_sep" input, we can specify a character we want to use to join the name of the original nested column and the nested df column names. 
+``` {r extension2}
+nested_data <- tibble(
+  date = c("2021-01-01","2021-01-01"),
+  weather_station = c("Breckenridge", "Dillon"),
+  station_df = list(breck_data, dillon_data)
+)
+#Taking a look at the data
+nested_data
+
+### lets try to simply unnest the data knowing that there is also a date in the nested dfs
+dates_unnested_data <- nested_data |>
+    unnest(station_df)
+
+# This gives us an error! We need to fix the columns. In addition to the way outlined above, we can use the names_sep parameter.
+unnested_with_sep <- nested_data %>%
+  unnest(station_df, names_sep = "_")
+
+#looking at results
+unnested_with_sep
+
+```
