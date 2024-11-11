@@ -164,3 +164,11 @@ https://purrr.tidyverse.org/
 purrr_tidyverse.Rmd
 
 Revision/Addition Description and Link:
+
+# Alexander Wrubel
+
+Initial Description and Link:
+- using stringr package to clean and prep data
+- Data607_tidyverseAW.Rmd
+
+Revision/Addition Description and Link:

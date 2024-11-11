@@ -1,0 +1,111 @@
+---
+title: "Data607_tidyverseAW"
+author: "aw"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Overview
+
+For this vignette, I'll demonstrate how to use the `stringr` package in tidyverse to help clean and organize data for better analysis and readability. The dataset we'll be using is on perceptions surrounding masculinity. First, you'll need to import the data from my public github repo.
+
+```{r lib}
+library(tidyverse)
+
+#import the data raw responses
+masculinity <- read.csv("https://raw.githubusercontent.com/awrubes/advprog/main/raw-responses.csv")
+```
+
+## Pivoting to Long
+
+The current raw data is in a wide format. In order to make it easier to analyze we'll want to pivot into a long format. However, you'll notice that in order to pivot this data so that each row represents a single observation, one of the columns "Weight" is an integer datatype. We'll need to convert this value into character so that we can pivot the entire dataframe.
+
+```{r pivot}
+
+#remove unnecessary columns 2-3 cols
+masculinity_rev <- masculinity[, -c(2,3)]
+
+#convert weight to string so can be pivoted
+masc_weight <- masculinity_rev %>%
+  mutate(
+    weight = as.character(weight)
+  )
+
+#pivot into long format so each row contains one observation
+masc_long <- masc_weight %>%
+  pivot_longer(
+    cols = where(is.character),
+    names_to = "question",
+    values_to = "answer"
+  )
+
+```
+
+## Cleaning Data with Regex
+
+Now that we have our data in a long format, we can go through and systematically make the data easier to read and analyze by adjusting col names and values. We'll use important functions in the `stringr` package such as `str_detect`, `str_replace` to make the necessary changes.
+
+```{r clean}
+
+#remove any rows that contain "not selected" using str detect
+masc_long_up <- masc_long %>%
+ filter(!str_detect(answer, "Not selected"))
+
+#filter the data using string patterns
+filtered_openend <- masc_long_up %>% 
+  filter(str_detect(question, "^q0002"))
+
+#count number of occurrences
+result <- filtered_openend %>%
+  group_by(answer) %>%
+  summarize(count = n())
+
+print(result)
+
+#Add full questions for readability and to combine answers that are associated with different question name variables
+masc_long_new <- masc_long_up %>%
+  mutate(
+    question_full = question,
+    question_full = str_replace(question, "^q0001\\w*", "How masculine do you feel?"),
+    question_full = str_replace(question_full, "^q0002\\w*", "How important is masculinity to you?"),
+    question_full = str_replace(question_full, "^q0004\\w*", "Where have you gotten your ideas about what it means to be a good man?"),
+    question_full = str_replace(question_full, "^q0005\\w*", "Do you think that society puts pressure on men in a way that is unhealthy or bad for them?"),
+    question_full = str_replace(question_full, "^q0007\\w*", "How often would you say you do each of the following?"),
+    question_full = str_replace(question_full, "^q0008\\w*", "Which of the following do you worry about on a daily or near daily basis?"),
+    question_full = str_replace(question_full, "^q0009\\w*", "Which of the following categories best describes your employment status?"),
+    question_full = str_replace(question_full, "^q0010\\w*", "In which of the following ways would you say it’s an ​advantage​ to be a man at
+your work right now?"),
+    question_full = str_replace(question_full, "^q0011\\w*", "In which of the following ways would you say it’s a ​disadvantage​ to be a man at your work right now?"),
+    question_full = str_replace(question_full, "^q0012\\w*", "Have you seen or heard of a sexual harassment incident at your work? If so, how did you respond?"),
+    question_full = str_replace(question_full, "^q0013\\w*", "And which of the following is the main reason you did not respond?"),
+    question_full = str_replace(question_full, "^q0014\\w*", "How much have you heard about the #MeToo movement?"),
+    question_full = str_replace(question_full, "^q0015\\w*", "As a man, would you say you think about your behavior at work differently in the wake of #MeToo?"),
+    question_full = str_replace(question_full, "^q0017\\w*", "Do you typically feel as though you’re expected to make the first move in romantic
+relationships?"),
+    question_full = str_replace(question_full, "^q0018\\w*", "How often do you try to be the one who pays when on a date?"),
+    question_full = str_replace(question_full, "^q0019\\w*", "Which of the following are reasons why you try to pay when on a date? "),
+    question_full = str_replace(question_full, "^q0020\\w*", "When you want to be physically intimate with someone, how do you gauge their interest?"),
+    question_full = str_replace(question_full, "^q0021\\w*", "Over the past 12 months, when it comes to sexual boundaries, which of the following things have you done?"),
+    question_full = str_replace(question_full, "^q0022\\w*", "Have you changed your behavior in romantic relationships in the wake of #MeToo movement?"),
+    question_full = str_replace(question_full, "^q0024\\w*", "Are you now married, widowed, divorced, separated, or have you never
+been married?"),
+    question_full = str_replace(question_full, "^q0025\\w*", "Do you have any children?"),
+    question_full = str_replace(question_full, "^orientation\\w*", "Would you describe your sexual orientation as:"),
+    question_full = str_replace(question_full, "^q0026\\w*", "Would you describe your sexual orientation as:"),
+    question_full = str_replace(question_full, "^q0026\\w*", "Would you describe your sexual orientation as:"),
+    question_full = str_replace(question_full, "^race\\w*", "What is your race"),
+    question_full = str_replace(question_full, "^edu\\w*", "What is the last grade of school you completed?"),
+    question_full = str_replace(question_full, "^weight\\w*", "What is your weight (kg)?"),
+  )
+
+head(masc_long_new)
+
+```
+
+## Conclusion
+
+This exercise demonstrates how powerful text manipulation can be in transforming raw data into a format that’s ready for meaningful analysis. Through leveraging `stringr` functions, we were able to standardize responses and enhance the interpretability of the data.
