@@ -20,6 +20,10 @@ Revision/Addition Description and Link:
 # Anthony R.
 
 Initial Description and Link:
+- Using `pivot_longer()` to reshape data for visualization
+- Utilizing multiple methods to visualize data
+- roman_tidyverse.qmd
+- [Here is a link to my github source](https://raw.githubusercontent.com/spacerome/TidyVerseCREATE/refs/heads/main/tidyverseCREATE.qmd)
 
 Revision/Addition Description and Link:
 
