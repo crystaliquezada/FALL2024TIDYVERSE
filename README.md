@@ -146,9 +146,10 @@ Revision/Addition Description and Link:
 
 # Tiffany H.
 
-Initial Description and Link:
+Initial Description and Link:This vignette explores analyzing election deniers' stances by state, using mutate() and case_when() from dplyr for efficient conditional transformations and recoding. It also demonstrates group_by(), summarize(), and arrange() for data aggregation. ggplot2 is used for visualization.
 
 Revision/Addition Description and Link:
+dplyr+ggplot2.Rmd
 
 
 # Zachary R.
