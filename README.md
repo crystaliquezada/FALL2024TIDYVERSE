@@ -12,7 +12,8 @@ Revision/Addition Description and Link:
 
 # Amish R.
 
-Initial Description and Link:
+Initial Description and Link: `group_by` and `summarize` tidyverse functions
+amish_tidyverse_vignette.rmd
 
 Revision/Addition Description and Link:
 
