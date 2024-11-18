@@ -47,8 +47,8 @@ Revision/Addition Description and Link:
 
 # Daniel B.
 
-Initial Description and Link:
-
+Initial Description and Link: This dataset explores maternal health risks for pregnant women based on factors such as age and blood pressure. It focuses on the RiskLevel column and uses ggplot2 to better explore how age and blood pressure relate to the risk level.  
+Tidyverse create Daniel Brusche.Rmd
 Revision/Addition Description and Link:
 
 
