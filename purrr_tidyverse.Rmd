@@ -245,6 +245,11 @@ ggplot(summary, aes(x = category)) +
   labs(title = "Total and Average Value by Category",
        x = "Category", 
        y = "Value")
+
+# The data has been grouped by the 'category' column and summarized to show both total and average values.
+# The blue bars represent the total value for each category.
+# The orange bars represent the average value for each category.
+# This plot gives a clear visual of how the categories compare in terms of total and average values.
 ```
 
 
