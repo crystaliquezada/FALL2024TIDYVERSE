@@ -250,6 +250,7 @@ ggplot(summary, aes(x = category)) +
 # The blue bars represent the total value for each category.
 # The orange bars represent the average value for each category.
 # This plot gives a clear visual of how the categories compare in terms of total and average values.
+
 ```
 
 
