@@ -213,6 +213,41 @@ car_info_df
 ```
 
 
+```{r crystal addition 1}
+library(dplyr)
+
+snames <- tibble(id = 1:5, name = c("Sally", "Suzie", "Sam", "Sara", "Sandy"))
+sages <- tibble(id = 1:5, age = c(25, 30, 35, 28, 22))
+
+joined_df <- left_join(snames, sages, by = "id")
+print(joined_df)
+
+# The left join merges the 'snames' and 'sages' data frames based on the common 'id' column.
+# The result shows a combined table with each person's name and age.
+# This is an example of how relational data (e.g., names and ages) can be merged.
+```
+
+
+```{r crystal addition 2}
+data <- tibble(
+  category = c("A", "A", "B", "B", "C", "C"),
+  value = c(10, 20, 30, 40, 50, 60)
+)
+
+summary <- data %>%
+  group_by(category) %>%
+  summarise(total_value = sum(value), avg_value = mean(value))
+print(summary)
+
+ggplot(summary, aes(x = category)) + 
+  geom_bar(aes(y = total_value), stat = "identity", fill = "skyblue", position = "dodge") + 
+  geom_bar(aes(y = avg_value), stat = "identity", fill = "orange", position = "dodge") + 
+  labs(title = "Total and Average Value by Category",
+       x = "Category", 
+       y = "Value")
+```
+
+
 ### Conclusion
 
 The `purrr` package, part of the Tidyverse, brings functional programming capabilities to R, making data manipulation with lists, vectors, and data frames more efficient and flexible.
