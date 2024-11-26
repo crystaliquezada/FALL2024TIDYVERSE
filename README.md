@@ -26,7 +26,7 @@ Initial Description and Link:
 - roman_tidyverse.qmd
 - [Here is a link to my github source](https://raw.githubusercontent.com/spacerome/TidyVerseCREATE/refs/heads/main/tidyverseCREATE.qmd)
 
-Revision/Addition Description and Link:
+Revision/Addition Description and Link: https://github.com/crystaliquezada/FALL2024TIDYVERSE
 
 
 # Benjamin W.
@@ -40,9 +40,9 @@ Revision/Addition Description and Link:
 
 # Crystal Q.
 
-Initial Description and Link:
+Initial Description and Link: 
 
-Revision/Addition Description and Link:
+Revision/Addition Description and Link: demonstrates grouping by category/combining columns to visualize.
 
 
 # Daniel B.
